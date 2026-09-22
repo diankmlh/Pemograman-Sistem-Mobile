@@ -79,148 +79,148 @@ class DiscountedProduct extends Product {
 }
 
 void main() {
-  // STEP 1 - VARIABEL & TIPE DATA
-  var productName = 'Shirt dress';
-  final productId = 'DF001';
-  const discount = 10;
+//   // STEP 1 - VARIABEL & TIPE DATA
+//   var productName = 'Shirt dress';
+//   final productId = 'DF001';
+//   const discount = 10;
 
-  int stock = 10;
-  double price = 150000;
-  String category = 'Fashion';
-  bool isAvailable = true;
+//   int stock = 10;
+//   double price = 150000;
+//   String category = 'Fashion';
+//   bool isAvailable = true;
 
-  List<String> categories = [
-    'Fashion',
-    'Kecantikan',
-    'Aksesoris',
-  ];
+//   List<String> categories = [
+//     'Fashion',
+//     'Kecantikan',
+//     'Aksesoris',
+//   ];
 
-  Map<String, dynamic> rawProduct = {
-    'id': 'DF001',
-    'name': 'Shirt dress',
-    'price': 150000,
-    'stock': 10,
-    'category': 'Fashion',
-  };
+//   Map<String, dynamic> rawProduct = {
+//     'id': 'DF001',
+//     'name': 'Shirt dress',
+//     'price': 150000,
+//     'stock': 10,
+//     'category': 'Fashion',
+//   };
 
-  print('STEP 1 - VARIABEL & TIPE DATA');
-  print('Nama Produk: $productName');
-  print('ID Produk: $productId');
-  print('Diskon: $discount%');
-  print('Stok: $stock');
-  print('Harga: $price');
-  print('Kategori: $category');
-  print('Tersedia: $isAvailable');
-  print('Daftar Kategori: $categories');
-  print('Data Produk: $rawProduct');
+//   print('STEP 1 - VARIABEL & TIPE DATA');
+//   print('Nama Produk: $productName');
+//   print('ID Produk: $productId');
+//   print('Diskon: $discount%');
+//   print('Stok: $stock');
+//   print('Harga: $price');
+//   print('Kategori: $category');
+//   print('Tersedia: $isAvailable');
+//   print('Daftar Kategori: $categories');
+//   print('Data Produk: $rawProduct');
 
-}
+// }
 
-  // STEP 2 - OPERATOR
-  double hargaSetelahDiskon = price - (price * discount / 100);
-  double hargaDuaProduk = price * 2;
-  double hargaPerProduk = price / 2;
-  int sisaStok = stock % 3;
+//   // STEP 2 - OPERATOR
+//   double hargaSetelahDiskon = price - (price * discount / 100);
+//   double hargaDuaProduk = price * 2;
+//   double hargaPerProduk = price / 2;
+//   int sisaStok = stock % 3;
 
-  print('STEP 2 - OPERATOR');
-  print('Harga setelah diskon: $hargaSetelahDiskon');
-  print('Harga 2 produk: $hargaDuaProduk');
-  print('Harga dibagi 2: $hargaPerProduk');
-  print('Sisa stok: $sisaStok');
+//   print('STEP 2 - OPERATOR');
+//   print('Harga setelah diskon: $hargaSetelahDiskon');
+//   print('Harga 2 produk: $hargaDuaProduk');
+//   print('Harga dibagi 2: $hargaPerProduk');
+//   print('Sisa stok: $sisaStok');
 
-  print('Harga sama dengan 150000: ${price == 150000}');
-  print('Harga tidak sama dengan 100000: ${price != 100000}');
-  print('Harga lebih dari 100000: ${price > 100000}');
-  print('Stok kurang dari 20: ${stock < 20}');
-  print('Harga lebih dari atau sama dengan 150000: ${price >= 150000}');
-  print('Stok kurang dari atau sama dengan 10: ${stock <= 10}');
+//   print('Harga sama dengan 150000: ${price == 150000}');
+//   print('Harga tidak sama dengan 100000: ${price != 100000}');
+//   print('Harga lebih dari 100000: ${price > 100000}');
+//   print('Stok kurang dari 20: ${stock < 20}');
+//   print('Harga lebih dari atau sama dengan 150000: ${price >= 150000}');
+//   print('Stok kurang dari atau sama dengan 10: ${stock <= 10}');
 
-  print(
-    'Produk tersedia dan stok lebih dari 0: ${isAvailable && stock > 0}',
-  );
+//   print(
+//     'Produk tersedia dan stok lebih dari 0: ${isAvailable && stock > 0}',
+//   );
 
-  print(
-    'Kategori Fashion, Kecantikan, atau Aksesoris: '
-    '${category == 'Fashion' || category == 'Kecantikan' || category == 'Aksesoris'}',
-  );
+//   print(
+//     'Kategori Fashion, Kecantikan, atau Aksesoris: '
+//     '${category == 'Fashion' || category == 'Kecantikan' || category == 'Aksesoris'}',
+//   );
 
-  print('Produk tidak tersedia: ${!isAvailable}');
+//   print('Produk tidak tersedia: ${!isAvailable}');
 
-}
+// // }
 
-  // STEP 3 - CONTROL FLOW
-  print('STEP 3 - CONTROL FLOW');
+//   // STEP 3 - CONTROL FLOW
+//   print('STEP 3 - CONTROL FLOW');
 
-  if (stock > 5) {
-    print('Status Stok: Tersedia');
-  } else if (stock > 0) {
-    print('Status Stok: Stok Terbatas');
-  } else {
-    print('Status Stok: Habis');
-  }
+//   if (stock > 5) {
+//     print('Status Stok: Tersedia');
+//   } else if (stock > 0) {
+//     print('Status Stok: Stok Terbatas');
+//   } else {
+//     print('Status Stok: Habis');
+//   }
 
-  double totalHarga = 0;
+//   double totalHarga = 0;
 
-  for (int i = 1; i <= 3; i++) {
-    totalHarga += price;
-  }
+//   for (int i = 1; i <= 3; i++) {
+//     totalHarga += price;
+//   }
 
-  print('Total harga 3 produk: $totalHarga');
+//   print('Total harga 3 produk: $totalHarga');
 
-  int stokSementara = stock;
+//   int stokSementara = stock;
 
-  while (stokSementara > 0) {
-    print('Stok tersisa: $stokSementara');
-    stokSementara--;
-  }
+//   while (stokSementara > 0) {
+//     print('Stok tersisa: $stokSementara');
+//     stokSementara--;
+//   }
 
-  print('Stok setelah dikurangi: $stokSementara');
+//   print('Stok setelah dikurangi: $stokSementara');
 
-  double diskonKategori;
+//   double diskonKategori;
 
-  switch (category) {
-    case 'Fashion':
-      diskonKategori = 10;
-      break;
-    case 'Kecantikan':
-      diskonKategori = 15;
-      break;
-    case 'Aksesoris':
-      diskonKategori = 5;
-      break;
-    default:
-      diskonKategori = 0;
-  }
+//   switch (category) {
+//     case 'Fashion':
+//       diskonKategori = 10;
+//       break;
+//     case 'Kecantikan':
+//       diskonKategori = 15;
+//       break;
+//     case 'Aksesoris':
+//       diskonKategori = 5;
+//       break;
+//     default:
+//       diskonKategori = 0;
+//   }
 
-  print('Diskon berdasarkan kategori $category: $diskonKategori%');
+//   print('Diskon berdasarkan kategori $category: $diskonKategori%');
 
-}
+// }
 
-  // STEP 4 - FUNCTION
-  double harga = 150000;
+//   // STEP 4 - FUNCTION
+//   double harga = 150000;
 
-  // Function dengan named parameter
-  double hasilDiskon = hitungHargaSetelahDiskon(
-    harga,
-    persenDiskon: 15,
-  );
+//   // Function dengan named parameter
+//   double hasilDiskon = hitungHargaSetelahDiskon(
+//     harga,
+//     persenDiskon: 15,
+//   );
 
-  print('STEP 4 - FUNCTION');
+//   print('STEP 4 - FUNCTION');
 
-  print('Harga awal: ${formatRupiah(harga)}');
+//   print('Harga awal: ${formatRupiah(harga)}');
 
-  print(
-    'Harga setelah diskon 15%: ${formatRupiah(hasilDiskon)}',
-  );
+//   print(
+//     'Harga setelah diskon 15%: ${formatRupiah(hasilDiskon)}',
+//   );
 
-  // Default parameter
-  double hasilDiskonDefault = hitungHargaSetelahDiskon(harga);
+//   // Default parameter
+//   double hasilDiskonDefault = hitungHargaSetelahDiskon(harga);
 
-   print(
-    'Harga setelah diskon default 10%: '
-    '${formatRupiah(hasilDiskonDefault)}',
-  );
-}
+//    print(
+//     'Harga setelah diskon default 10%: '
+//     '${formatRupiah(hasilDiskonDefault)}',
+//   );
+// }
 
   // STEP 5 - OOP
   Product product = Product(
