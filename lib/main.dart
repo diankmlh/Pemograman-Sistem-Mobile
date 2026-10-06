@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'screens/home_page.dart';
+import 'models/product.dart';
+import 'screens/main_page.dart';
+import 'screens/product_detail_page.dart';
+
+// LoginPage
+// import 'screens/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,11 +19,33 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'TokoKita',
 
-      home: const HomePage(),
+      
+      // home: const LoginPage(),
+
+      // MainPage halaman awal apk
+      home: const MainPage(),
+
+      // Named Routes
+      routes: {
+        '/detail': (context) {
+          final arguments = ModalRoute.of(context)!.settings.arguments;
+
+          if (arguments is Product) {
+            return ProductDetailPage(
+              product: arguments,
+            );
+          }
+
+          return const Scaffold(
+            body: Center(
+              child: Text('Data produk tidak ditemukan'),
+            ),
+          );
+        },
+      },
     );
   }
 }
-
 
 // final List<Product> daftarProduk = [
 //   ...

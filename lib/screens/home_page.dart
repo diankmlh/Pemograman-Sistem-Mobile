@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import '../models/product.dart';
 import '../widgets/product_card.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   // DATA PRODUK
   List<Product> get daftarProduk => [
         Product(
@@ -17,7 +22,6 @@ class HomePage extends StatelessWidget {
           description:
               'Shirt dress wanita ukuran M, L, XL. Bahan katun sejuk dan nyaman dipakai',
         ),
-
         Product(
           id: 'DF002',
           name: 'Skinny Jeans',
@@ -27,7 +31,6 @@ class HomePage extends StatelessWidget {
           stock: 10,
           description: 'Skinny jeans fashion.',
         ),
-
         // Product(
         //   id: 'DA001',
         //   name: 'Pearl Bracelet',
@@ -37,7 +40,6 @@ class HomePage extends StatelessWidget {
         //   stock: 8,
         //   description: 'Gelang mutiara elegan.',
         // ),
-
         DiscountedProduct(
           id: 'DA001',
           name: 'Pearl Bracelet',
@@ -48,7 +50,6 @@ class HomePage extends StatelessWidget {
           description: 'Gelang mutiara elegan.',
           discountPercent: 15,
         ),
-
         Product(
           id: 'DK001',
           name: 'Lip Tint',
@@ -58,7 +59,6 @@ class HomePage extends StatelessWidget {
           stock: 6,
           description: 'Lip tint.',
         ),
-
         Product(
           id: 'DK002',
           name: 'Face Wash',
@@ -68,7 +68,6 @@ class HomePage extends StatelessWidget {
           stock: 12,
           description: 'Face wash.',
         ),
-
         // Product(
         //   id: 'DA002',
         //   name: 'Sling Bag',
@@ -78,7 +77,6 @@ class HomePage extends StatelessWidget {
         //   stock: 5,
         //   description: 'Tas sling praktis untuk aktivitas sehari-hari.',
         // ),
-
         DiscountedProduct(
           id: 'DA002',
           name: 'Sling Bag',
@@ -89,7 +87,6 @@ class HomePage extends StatelessWidget {
           description: 'Tas sling praktis untuk aktivitas sehari-hari.',
           discountPercent: 15,
         ),
-
         Product(
           id: 'DK003',
           name: 'Hair Serum',
@@ -99,7 +96,6 @@ class HomePage extends StatelessWidget {
           stock: 15,
           description: 'Hair serum.',
         ),
-
         // Product(
         //   id: 'DA003',
         //   name: 'Kalung Matinee',
@@ -109,7 +105,6 @@ class HomePage extends StatelessWidget {
         //   stock: 7,
         //   description: 'Kalung matinee yang elegan.',
         // ),
-
         DiscountedProduct(
           id: 'DA003',
           name: 'Kalung Matinee',
@@ -120,7 +115,6 @@ class HomePage extends StatelessWidget {
           description: 'Kalung model matinee yang elegan.',
           discountPercent: 15,
         ),
-
         Product(
           id: 'DF003',
           name: 'Kemeja Denim',
@@ -130,7 +124,6 @@ class HomePage extends StatelessWidget {
           stock: 4,
           description: 'Kemeja denim.',
         ),
-
         Product(
           id: 'DF004',
           name: 'Blouse Casual',
@@ -140,7 +133,6 @@ class HomePage extends StatelessWidget {
           stock: 9,
           description: 'Blouse casual wanita.',
         ),
-
         Product(
           id: 'DF005',
           name: 'Jaket Denim',
@@ -150,7 +142,6 @@ class HomePage extends StatelessWidget {
           stock: 6,
           description: 'Jaket denim casual.',
         ),
-
         Product(
           id: 'DK004',
           name: 'Moisturizer',
@@ -160,7 +151,6 @@ class HomePage extends StatelessWidget {
           stock: 10,
           description: 'Moisturizer untuk perawatan kulit.',
         ),
-
         Product(
           id: 'DK005',
           name: 'Sunscreen',
@@ -170,7 +160,6 @@ class HomePage extends StatelessWidget {
           stock: 11,
           description: 'Sunscreen untuk perlindungan kulit.',
         ),
-
         DiscountedProduct(
           id: 'DA004',
           name: 'Anting Hoop',
@@ -181,7 +170,6 @@ class HomePage extends StatelessWidget {
           description: 'Anting hoop sederhana dan elegan.',
           discountPercent: 15,
         ),
-
         DiscountedProduct(
           id: 'DA005',
           name: 'Cincin Minimalis',
@@ -194,6 +182,7 @@ class HomePage extends StatelessWidget {
         ),
       ];
 
+  // tabel no.1
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -228,7 +217,6 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-
       body: LayoutBuilder(
         builder: (context, constraints) {
           int jumlahKolom;
@@ -239,13 +227,14 @@ class HomePage extends StatelessWidget {
             jumlahKolom = 3;
           } else if (constraints.maxWidth >= 600) {
             jumlahKolom = 2;
-            } else {
-                jumlahKolom = 1;
+          } else {
+            jumlahKolom = 1;
           }
 
           final jumlahBaris =
               (daftarProduk.length / jumlahKolom).ceil();
 
+          // tabel no.4
           return ListView.builder(
             padding: const EdgeInsets.all(4),
             itemCount: jumlahBaris,
@@ -264,6 +253,25 @@ class HomePage extends StatelessWidget {
                       child: ProductCard(
                         key: ValueKey(daftarProduk[i].id),
                         product: daftarProduk[i],
+
+                        // NAVIGASI KE DETAIL DENGAN NAMED ROUTE
+                        onTap: () async {
+                          final jumlah = await Navigator.pushNamed(
+                            context,
+                            '/detail',
+                            arguments: daftarProduk[i],
+                          );
+
+                          if (jumlah != null && mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  '${daftarProduk[i].name} ditambahkan sebanyak $jumlah',
+                                ),
+                              ),
+                            );
+                          }
+                        },
                       ),
                     ),
 
