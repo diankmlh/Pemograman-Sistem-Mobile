@@ -1,12 +1,21 @@
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'models/product.dart';
 import 'screens/main_page.dart';
 import 'screens/product_detail_page.dart';
+import 'controllers/cart_controller.dart';
 
 // LoginPage
 // import 'screens/login_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Registrasi controller satu kali untuk seluruh aplikasi
+  Get.put(CartController(), permanent: true);
+
   runApp(const MyApp());
 }
 
@@ -15,25 +24,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TokoKita',
 
-      
       // home: const LoginPage(),
 
       // MainPage halaman awal apk
       home: const MainPage(),
 
-      // Named Routes
+      // Named Route lama tetap dipertahankan
       routes: {
         '/detail': (context) {
           final arguments = ModalRoute.of(context)!.settings.arguments;
 
           if (arguments is Product) {
-            return ProductDetailPage(
-              product: arguments,
-            );
+            return ProductDetailPage(product: arguments);
           }
 
           return const Scaffold(
@@ -64,7 +70,6 @@ class MyApp extends StatelessWidget {
 //     }).toList(),
 //   ),
 // );
-
 
 // class TokoKitaPage extends StatefulWidget {
 //   const TokoKitaPage({super.key});

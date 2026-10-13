@@ -1,6 +1,12 @@
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import '../models/product.dart';
 import '../widgets/product_card.dart';
+import '../controllers/cart_controller.dart';
+import 'product_detail_page.dart';
+import 'cart_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,6 +16,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final CartController cart = Get.find<CartController>();
+
   // DATA PRODUK
   List<Product> get daftarProduk => [
         Product(
@@ -182,9 +190,10 @@ class _HomePageState extends State<HomePage> {
         ),
       ];
 
-  // tabel no.1
   @override
   Widget build(BuildContext context) {
+    final products = daftarProduk;
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -202,16 +211,18 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Text(
                   'Belanja jadi lebih mudah',
-                  style: TextStyle(
-                    fontSize: 12,
-                  ),
+                  style: TextStyle(fontSize: 12),
                 ),
               ],
             ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.shopping_cart_outlined,
+            Obx(
+              () => IconButton(
+                onPressed: () => Get.to(() => const CartPage()),
+                icon: Badge(
+                  isLabelVisible: cart.totalItem > 0,
+                  label: Text('${cart.totalItem}'),
+                  child: const Icon(Icons.shopping_cart_outlined),
+                ),
               ),
             ),
           ],
@@ -231,18 +242,17 @@ class _HomePageState extends State<HomePage> {
             jumlahKolom = 1;
           }
 
-          final jumlahBaris =
-              (daftarProduk.length / jumlahKolom).ceil();
+          final jumlahBaris = (products.length / jumlahKolom).ceil();
 
-          // tabel no.4
+          // Tabel no.4
           return ListView.builder(
             padding: const EdgeInsets.all(4),
             itemCount: jumlahBaris,
             itemBuilder: (context, index) {
               final int startIndex = index * jumlahKolom;
               final int endIndex =
-                  (startIndex + jumlahKolom > daftarProduk.length)
-                      ? daftarProduk.length
+                  (startIndex + jumlahKolom > products.length)
+                      ? products.length
                       : startIndex + jumlahKolom;
 
               return Row(
@@ -251,22 +261,22 @@ class _HomePageState extends State<HomePage> {
                   for (int i = startIndex; i < endIndex; i++)
                     Expanded(
                       child: ProductCard(
-                        key: ValueKey(daftarProduk[i].id),
-                        product: daftarProduk[i],
-
-                        // NAVIGASI KE DETAIL DENGAN NAMED ROUTE
+                        key: ValueKey(products[i].id),
+                        product: products[i],
                         onTap: () async {
-                          final jumlah = await Navigator.pushNamed(
-                            context,
-                            '/detail',
-                            arguments: daftarProduk[i],
+                          final result = await Get.to<bool>(
+                            () => ProductDetailPage(
+                              product: products[i],
+                            ),
                           );
 
-                          if (jumlah != null && mounted) {
+                          if (!mounted) return;
+
+                          if (result == true) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  '${daftarProduk[i].name} ditambahkan sebanyak $jumlah',
+                                  '${products[i].name} ditambahkan ke keranjang',
                                 ),
                               ),
                             );
@@ -274,13 +284,10 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     ),
-
                   if (endIndex - startIndex < jumlahKolom)
                     ...List.generate(
                       jumlahKolom - (endIndex - startIndex),
-                      (_) => const Expanded(
-                        child: SizedBox(),
-                      ),
+                      (_) => const Expanded(child: SizedBox()),
                     ),
                 ],
               );

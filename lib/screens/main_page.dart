@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'cart_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -11,10 +13,10 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int selectedIndex = 0;
 
-  final List<Widget> pages = [
-    const HomePage(),
-    const _CartPage(),
-    const _ProfilePage(),
+  final List<Widget> pages = const [
+    HomePage(),
+    CartPage(),
+    _ProfilePage(),
   ];
 
   @override
@@ -47,6 +49,12 @@ class _MainPageState extends State<MainPage> {
     );
   }
 }
+
+// ------------------------------------------------------------
+// HALAMAN KERANJANG LAMA
+// Kode asli dipertahankan untuk dokumentasi dan referensi.
+// Halaman aktif menggunakan CartPage dari cart_page.dart.
+// ------------------------------------------------------------
 
 // Halaman Keranjang
 class _CartPage extends StatelessWidget {
@@ -136,6 +144,10 @@ class _CartPage extends StatelessWidget {
   }
 }
 
+// ------------------------------------------------------------
+// HALAMAN PROFIL LAMA
+// ------------------------------------------------------------
+
 // Halaman Profil
 class _ProfilePage extends StatelessWidget {
   const _ProfilePage();
@@ -215,6 +227,10 @@ class _ProfilePage extends StatelessWidget {
     );
   }
 }
+
+// ------------------------------------------------------------
+// WIDGET MENU PROFIL LAMA
+// ------------------------------------------------------------
 
 // Widget menu profil
 class _ProfileMenu extends StatelessWidget {
